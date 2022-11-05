@@ -9,5 +9,6 @@ public class ProjectGroup {
     private Integer id;
     private String name;
     private List<Student> students;
+    private CourseClass courseClass;
 
 }
