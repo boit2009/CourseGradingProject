@@ -9,7 +9,9 @@ import coursegradingproject.controller.dto.StudentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -29,6 +31,32 @@ public class StudentManager {
                 .name(studentSaved.getName())
                 .testScores(studentSaved.getTestScores())
                 .projectGroup(studentSaved.getProjectGroup()).build();
+
+
+
+    }
+
+    public List<StudentResponse> getAllStudents() {
+        return studentRepository.findAll().stream().map(student -> {
+             return StudentResponse.builder()
+                    .id(student.getId()).courseClassId(student.getCourseClass().getId())
+                    .name(student.getName())
+                    .testScores(student.getTestScores())
+                    .projectGroup(student.getProjectGroup()).build();
+        }).collect(Collectors.toList());
+    }
+    public StudentResponse getStudentById(Integer id){
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isEmpty()){
+            throw new RuntimeException("There is no student with this ID");
+        }
+        Student student = studentOptional.get();
+        return StudentResponse.builder()
+                .id(student.getId()).courseClassId(student.getCourseClass().getId())
+                .name(student.getName())
+                .testScores(student.getTestScores())
+                .projectGroup(student.getProjectGroup()).build();
+
 
 
 
