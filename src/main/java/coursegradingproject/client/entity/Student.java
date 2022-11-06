@@ -2,7 +2,9 @@ package coursegradingproject.client.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,14 +12,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 @Table(name = "student")
 public class Student {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     private CourseClass courseClass;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,5 +33,12 @@ public class Student {
     public Student(String name, CourseClass courseClass) {
         this.name = name;
         this.courseClass = courseClass;
+    }
+
+    public Student(Integer id, String name, CourseClass courseClass, ProjectGroup projectGroup) {
+        this.id = id;
+        this.name = name;
+        this.courseClass = courseClass;
+        this.projectGroup = projectGroup;
     }
 }

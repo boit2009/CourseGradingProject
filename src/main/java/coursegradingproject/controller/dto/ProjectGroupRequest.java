@@ -1,16 +1,20 @@
 package coursegradingproject.controller.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
+@NoArgsConstructor
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class StudentRequest {
-    private Integer courseClassId;
+@Builder
+public class ProjectGroupRequest {
     private String name;
-    private Integer projectGroupId;
+    private List<Integer> studentIds;
+    private Integer courseClassId;
 }
