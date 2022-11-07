@@ -2,6 +2,7 @@ package coursegradingproject.controller;
 
 import coursegradingproject.business.StudentManager;
 import coursegradingproject.controller.dto.StudentRequest;
+import coursegradingproject.controller.dto.StudentRequestCreate;
 import coursegradingproject.controller.dto.StudentResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class StudentController {
         return studentManager.getStudentById(id);
     }
     @PostMapping(value = "/students", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public StudentResponse addStudent(@RequestBody StudentRequest studentDTO){
+    public StudentResponse addStudent(@RequestBody StudentRequestCreate studentDTO){
         return studentManager.saveStudent(studentDTO);
 
     }

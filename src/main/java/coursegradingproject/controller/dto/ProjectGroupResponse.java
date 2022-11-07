@@ -1,6 +1,5 @@
 package coursegradingproject.controller.dto;
 
-import coursegradingproject.client.entity.CourseClass;
 import coursegradingproject.client.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +16,6 @@ import java.util.List;
 public class ProjectGroupResponse {//todo kvesebb info
     private String name;
     private List<Student> students;
-    private CourseClass courseClass;
+    private Integer courseClassId;
     private double ProjectScore;
 }

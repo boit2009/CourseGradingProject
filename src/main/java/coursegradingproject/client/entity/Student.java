@@ -41,4 +41,9 @@ public class Student {
         this.courseClass = courseClass;
         this.projectGroup = projectGroup;
     }
+    public Student(String name, CourseClass courseClass, ProjectGroup projectGroup) {
+        this.name = name;
+        this.courseClass = courseClass;
+        this.projectGroup = projectGroup;
+    }
 }

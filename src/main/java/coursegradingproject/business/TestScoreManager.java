@@ -1,6 +1,5 @@
 package coursegradingproject.business;
 
-import coursegradingproject.client.entity.CourseClass;
 import coursegradingproject.client.entity.Student;
 import coursegradingproject.client.entity.TestScore;
 import coursegradingproject.client.repository.StudentRepository;
@@ -31,8 +30,30 @@ public class TestScoreManager {
                 .id(student.getId()).courseClassId(student.getCourseClass().getId())
                 .name(student.getName())
                 .testScores(student.getTestScores())
-                .projectGroup(student.getProjectGroup()).build();
+                .projectGroupId(student.getProjectGroup() == null ? null : student.getProjectGroup().getId()).build();
 
 
     }
+    public StudentResponse modifyTestScoreById(TestScoreRequest testScoreRequest,  Integer studentID, Integer testID){
+        Optional<Student> studentOptional = studentRepository.findById(studentID);
+        if (studentOptional.isEmpty()){
+            throw new NoSuchElementException("There is no student with this ID!");
+        }
+        Optional<TestScore> testScoreOptional = testScoreRepository.findById(testID);
+        if (testScoreOptional.isEmpty()){
+            throw new NoSuchElementException("There is no testScore with this ID!");
+        }
+        TestScore testScore = testScoreOptional.get();
+        testScore.setTestScore(testScoreRequest.getTestScore());
+        Student student = studentOptional.get();
+        testScoreRepository.flush();
+        return StudentResponse.builder()
+                .id(student.getId()).courseClassId(student.getCourseClass().getId())
+                .name(student.getName())
+                .testScores(student.getTestScores())
+                .projectGroupId(student.getProjectGroup() == null ? null : student.getProjectGroup().getId()).build();
+    }
+
+
+
 }

@@ -35,7 +35,7 @@ public class ProjectGroupManager {
         return ProjectGroupResponse.builder()
                 .name(projectGroup.getName())
                 .students(projectGroup.getStudents())
-                .courseClass(projectGroup.getCourseClass())
+                .courseClassId(projectGroup.getCourseClass().getId())
                 .ProjectScore(projectGroup.getProjectScore())
                 .build();
 
@@ -65,7 +65,7 @@ public class ProjectGroupManager {
         projectGroupRepository.flush();
         return ProjectGroupResponse.builder()
                 .ProjectScore(projectGroupSaved.getProjectScore())
-                .courseClass(projectGroupSaved.getCourseClass())
+                .courseClassId(projectGroupSaved.getCourseClass().getId())
                 .students(projectGroupSaved.getStudents())
                 .name(projectGroupSaved.getName())
                 .build();
