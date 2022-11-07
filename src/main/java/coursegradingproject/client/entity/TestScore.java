@@ -13,8 +13,13 @@ public class TestScore {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER/*, cascade = {CascadeType.MERGE}*/)
     @JsonBackReference
     private Student student;
     private double testScore;
+
+    public TestScore(Student student, double testScore) {
+        this.student = student;
+        this.testScore = testScore;
+    }
 }
