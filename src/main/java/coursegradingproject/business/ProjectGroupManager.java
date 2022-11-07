@@ -8,6 +8,7 @@ import coursegradingproject.client.repository.ProjectGroupRepository;
 import coursegradingproject.client.repository.StudentRepository;
 import coursegradingproject.controller.dto.ProjectGroupRequest;
 import coursegradingproject.controller.dto.ProjectGroupResponse;
+import coursegradingproject.controller.dto.ProjectGroupScoreRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -72,5 +73,21 @@ public class ProjectGroupManager {
 
 
 
+    }
+
+    public ProjectGroupResponse updateScore(ProjectGroupScoreRequest projectGroupScoreRequest, Integer projectID) {
+        Optional<ProjectGroup> projectGroupOptional = projectGroupRepository.findById(projectID);
+        if (projectGroupOptional.isEmpty()){
+            throw new NoSuchElementException("There is no projectGroup with this ID");
+        }
+        ProjectGroup projectGroup = projectGroupOptional.get();
+        projectGroup.setProjectScore(projectGroupScoreRequest.getProjectScore());
+        ProjectGroup projectGroupSaved = projectGroupRepository.save(projectGroup);
+        return ProjectGroupResponse.builder()
+                .ProjectScore(projectGroupSaved.getProjectScore())
+                .courseClassId(projectGroupSaved.getCourseClass().getId())
+                .students(projectGroupSaved.getStudents())
+                .name(projectGroupSaved.getName())
+                .build();
     }
 }
