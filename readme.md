@@ -24,3 +24,10 @@ $ mvn install
 $ docker-compose up
 $ mvn spring-boot:run
 ```
+
+#### Reaching endpoints
+http://localhost:8089/swagger-ui/index.html
+
+#### Used Roles
+TEACHER, username: teacher, password: teacher
+STUDENT, username: student, password: student
