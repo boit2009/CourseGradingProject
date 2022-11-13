@@ -19,6 +19,11 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <flyway.user>coursegrading</flyway.user>
+        <flyway.password>pw1</flyway.password>
+        <flyway.schemas>schemaName</flyway.schemas>
+
     </properties>
     <dependencies>
         <dependency>
@@ -93,10 +98,14 @@
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
+
+
 
     </dependencies>
 

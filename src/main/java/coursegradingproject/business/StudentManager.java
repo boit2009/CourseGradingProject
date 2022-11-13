@@ -83,7 +83,7 @@ public class StudentManager {
                     .id(student.getId()).courseClassId(student.getCourseClass().getId())
                     .name(student.getName())
                     .testScores(student.getTestScores())
-                    .projectGroupId(student.getProjectGroup().getId()).build();
+                    .projectGroupId(student.getProjectGroup() == null ? null : student.getProjectGroup().getId()).build();
         }).collect(Collectors.toList());
     }
     public StudentResponse getStudentById(Integer id){
