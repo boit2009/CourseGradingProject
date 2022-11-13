@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,24 +30,29 @@ public class StudentController {
     private final StudentManager studentManager;
     @Operation
     @GetMapping("/students")
+    @Secured("ROLE_TEACHER")
     public List<StudentResponse> getAllStudents(@RequestParam(required = false, defaultValue = "20") Integer limit,
                                                 @RequestParam(required = false, defaultValue = "desc") String sort){
         return studentManager.getAllStudents(limit, sort);
     }
+    @Secured("ROLE_STUDENT")
     @GetMapping("/students/{id}")
     public StudentResponse getStudentById(@PathVariable Integer id){
         return studentManager.getStudentById(id);
     }
+    @Secured("ROLE_TEACHER")
     @PostMapping(value = "/students", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public StudentResponse addStudent(@RequestBody StudentRequestCreate studentDTO){
         return studentManager.saveStudent(studentDTO);
 
     }
     @DeleteMapping("/students/{id}")
+    @Secured("ROLE_TEACHER")
     public String removeStudentById(@PathVariable Integer id){
         return studentManager.removeStudentById(id);
     }
 
+    @Secured("ROLE_TEACHER")
     @PutMapping(value = "/students/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public StudentResponse modifyStudent(@RequestBody StudentRequest studentDTO, @PathVariable Integer id){
         return studentManager.modifyStudent(studentDTO,id);
