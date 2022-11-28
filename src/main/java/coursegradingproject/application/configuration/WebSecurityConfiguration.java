@@ -53,6 +53,7 @@ public class WebSecurityConfiguration {
         return NoOpPasswordEncoder.getInstance();
     }
 
+
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
